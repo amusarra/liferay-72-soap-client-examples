@@ -1,0 +1,3 @@
+Bundle-Name: Calculator Client Gogo Shell Commands
+Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.calculator.gogoshell
+Bundle-Version: 1.0.0

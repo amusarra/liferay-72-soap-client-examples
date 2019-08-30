@@ -1,0 +1,1 @@
+# Liferay 7.2 SOAP Client Examples

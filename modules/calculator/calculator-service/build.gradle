@@ -5,22 +5,11 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath group: "gradle.plugin.cz.swsamuraj", name: "gradle-jaxws-plugin", version: "0.6.1"
+		classpath "gradle.plugin.cz.swsamuraj:gradle-jaxws-plugin:0.6.1"
 	}
 }
 
 apply plugin: "cz.swsamuraj.jaxws"
-
-buildscript {
-	repositories {
-		maven {
-			url "https://plugins.gradle.org/m2/"
-		}
-	}
-	dependencies {
-		classpath group: "gradle.plugin.cz.swsamuraj", name: "gradle-jaxws-plugin", version: "0.6.1"
-	}
-}
 
 dependencies {
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "4.4.0"

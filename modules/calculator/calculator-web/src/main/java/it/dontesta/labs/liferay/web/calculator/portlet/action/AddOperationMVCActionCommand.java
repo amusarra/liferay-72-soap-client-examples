@@ -91,7 +91,4 @@ public class AddOperationMVCActionCommand extends BaseMVCActionCommand {
 	@Reference(policyOption = ReferencePolicyOption.GREEDY)
 	private Calculator _calculator;
 
-	@Reference
-	private Portal _portal;
-
 }

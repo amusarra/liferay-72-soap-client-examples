@@ -24,6 +24,7 @@ package it.dontesta.labs.liferay.webservice.calculator.gogoshell;
 
 import it.dontesta.labs.liferay.webservice.calculator.api.Calculator;
 import it.dontesta.labs.liferay.webservice.calculator.exception.CalculatorOperationException;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferencePolicyOption;
@@ -41,48 +42,37 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
 	},
 	service = Object.class
 )
-public class CalculatorCommand {
+public class CalculatorCommand implements Calculator {
+
+	public int add(int number1, int number2)
+		throws CalculatorOperationException {
+
+		return getCalculatorService().add(number1, number2);
+	}
+
+	public int divide(int number1, int number2)
+		throws CalculatorOperationException {
+
+		return getCalculatorService().divide(number1, number2);
+	}
 
 	public Calculator getCalculatorService() {
 		return _calculator;
 	}
 
-	public void add(int number1, int number2) {
-		try {
-			System.out.println(getCalculatorService().add(number1, number2));
-		}
-		catch (CalculatorOperationException e) {
-			e.printStackTrace();
-		}
+	public int multiply(int number1, int number2)
+		throws CalculatorOperationException {
+
+		return getCalculatorService().multiply(number1, number2);
 	}
 
-	public void divide(int number1, int number2) {
-		try {
-			System.out.println(getCalculatorService().divide(number1, number2));
-		}
-		catch (CalculatorOperationException e) {
-			e.printStackTrace();
-		}
-	}
+	public int subtract(int number1, int number2)
+		throws CalculatorOperationException {
 
-	public void multiply(int number1, int number2) {
-		try {
-			System.out.println(getCalculatorService().multiply(number1, number2));
-		}
-		catch (CalculatorOperationException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void subtract(int number1, int number2) {
-		try {
-			System.out.println(getCalculatorService().subtract(number1, number2));
-		}
-		catch (CalculatorOperationException e) {
-			e.printStackTrace();
-		}
+		return getCalculatorService().subtract(number1, number2);
 	}
 
 	@Reference(policyOption = ReferencePolicyOption.GREEDY)
 	private volatile Calculator _calculator;
+
 }

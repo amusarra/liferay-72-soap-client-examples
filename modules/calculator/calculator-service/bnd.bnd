@@ -1,0 +1,3 @@
+Bundle-Name: Calculator SOAP Client Implementation
+Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.calculator.client
+Bundle-Version: 1.0.0

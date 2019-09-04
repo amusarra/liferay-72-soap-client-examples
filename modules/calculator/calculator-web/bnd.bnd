@@ -1,0 +1,4 @@
+Bundle-Name: Calculator Web Application
+Bundle-SymbolicName: it.dontesta.labs.liferay.web.calculator
+Bundle-Version: 1.0.0
+Export-Package: it.dontesta.labs.liferay.web.calculator.constants

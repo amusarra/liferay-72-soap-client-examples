@@ -37,7 +37,7 @@ import org.tempuri.CalculatorSoap;
 /**
  * @author Antonio Musarra
  */
-@Component(immediate = true, property = {}, service = Calculator.class)
+@Component(immediate = true, property = "secure=off", service = Calculator.class)
 public class CalculatorClientImpl implements Calculator {
 
 	@Override

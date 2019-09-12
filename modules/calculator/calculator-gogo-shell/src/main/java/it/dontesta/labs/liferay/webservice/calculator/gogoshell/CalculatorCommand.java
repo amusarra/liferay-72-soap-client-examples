@@ -34,10 +34,8 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  */
 @Component(
 	property = {
-		"osgi.command.function=add",
-		"osgi.command.function=divide",
-		"osgi.command.function=multiply",
-		"osgi.command.function=subtract",
+		"osgi.command.function=add", "osgi.command.function=divide",
+		"osgi.command.function=multiply", "osgi.command.function=subtract",
 		"osgi.command.scope=calculator"
 	},
 	service = Object.class

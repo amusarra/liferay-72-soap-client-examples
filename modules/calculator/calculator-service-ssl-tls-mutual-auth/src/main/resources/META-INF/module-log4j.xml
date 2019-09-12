@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<category name="it.dontesta.labs.liferay.webservice.calculator.client.tls.auth.CalculatorClientSSLTLSMutualAuthImpl">
+		<priority value="ERROR" />
+	</category>
+</log4j:configuration>

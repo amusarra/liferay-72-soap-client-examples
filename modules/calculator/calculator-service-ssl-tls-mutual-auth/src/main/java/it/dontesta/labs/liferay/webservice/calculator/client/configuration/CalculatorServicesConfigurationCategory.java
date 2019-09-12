@@ -20,30 +20,43 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.dontesta.labs.liferay.webservice.calculator.exception;
+package it.dontesta.labs.liferay.webservice.calculator.client.configuration;
+
+import com.liferay.configuration.admin.category.ConfigurationCategory;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Antonio Musarra
  */
-public class CalculatorOperationException extends Exception {
+@Component(service = ConfigurationCategory.class)
+public class CalculatorServicesConfigurationCategory
+	implements ConfigurationCategory {
 
-	public CalculatorOperationException(String message) {
-		super(message);
+	@Override
+	public String getBundleSymbolicName() {
+		return "it.dontesta.labs.liferay.webservice.calculator.client.tls";
 	}
 
-	public CalculatorOperationException(String message, Throwable cause) {
-		super(message, cause);
+	@Override
+	public String getCategoryIcon() {
+		return _CATEGORY_ICON;
 	}
 
-	public CalculatorOperationException(Throwable cause) {
-		super(cause);
+	@Override
+	public String getCategoryKey() {
+		return _CATEGORY_KEY;
 	}
 
-	protected CalculatorOperationException(
-		String message, Throwable cause, boolean enableSuppression,
-		boolean writableStackTrace) {
-
-		super(message, cause, enableSuppression, writableStackTrace);
+	@Override
+	public String getCategorySection() {
+		return _CATEGORY_SECTION;
 	}
+
+	private static final String _CATEGORY_ICON = "web-content";
+
+	private static final String _CATEGORY_KEY = "external-services-calculator";
+
+	private static final String _CATEGORY_SECTION = "external-services";
 
 }

@@ -76,7 +76,7 @@ We recall that Liferay uses the [Apache CXF framework](https://cxf.apache.org/) 
 -Djavax.net.ssl.keyStoreType=
 ```
 
-Console 3 - System settings for configure trust store and key store
+Console 3 - System settings for configure truststore and keystore
 
 
 
@@ -330,7 +330,7 @@ The new WSDL of the service will be available at the URL https://localhost:10443
 
 ```bash
 ##
-# Servizio di mutua autenticazione via Apache HTTPD
+# Mutual authentication service via Apache HTTPD
 ##
 127.0.0.1       tls-auth.dontesta.it
 ```

@@ -26,6 +26,7 @@ package it.dontesta.labs.liferay.webservice.calculator.exception;
  * @author Antonio Musarra
  */
 public class CalculatorServiceException extends Exception {
+
 	public CalculatorServiceException(String message) {
 		super(message);
 	}
@@ -41,6 +42,8 @@ public class CalculatorServiceException extends Exception {
 	protected CalculatorServiceException(
 		String message, Throwable cause, boolean enableSuppression,
 		boolean writableStackTrace) {
+
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
+
 }

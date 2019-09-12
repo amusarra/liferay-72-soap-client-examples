@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
 
 import it.dontesta.labs.liferay.web.calculator.constants.CalculatorAppPortletKeys;
 import it.dontesta.labs.liferay.web.calculator.constants.CalculatorAppWebKeys;

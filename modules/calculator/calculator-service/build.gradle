@@ -5,7 +5,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath "gradle.plugin.cz.swsamuraj:gradle-jaxws-plugin:0.6.1"
+		classpath group: "gradle.plugin.cz.swsamuraj", name: "gradle-jaxws-plugin", version: "0.6.1"
 	}
 }
 

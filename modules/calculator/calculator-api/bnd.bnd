@@ -1,6 +1,6 @@
 Bundle-Name: Calculator Client API
 Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.calculator.api
 Bundle-Version: 1.0.0
-Export-Package: \
+Export-Package:\
 	it.dontesta.labs.liferay.webservice.calculator.api,\
 	it.dontesta.labs.liferay.webservice.calculator.exception

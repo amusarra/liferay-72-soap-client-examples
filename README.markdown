@@ -100,7 +100,7 @@ Source Code 1 - Setting SSLSocketFactory
 
 
 
-We can't even use *HttpsURLConnection.setDefaultSSLSocketFactory(_getSSLConnectionSocketFactory())* because ignored by Apache CXF unless I configure the *useHttpsURLConnectionDefaultSslSocketFactory* property. Unfortunately, the **Liferay SOAP Extender** does not allow to act on the configuration of Apache CXF in depth.
+We can't even use *HttpsURLConnection.setDefaultSSLSocketFactory(_getSSLConnectionSocketFactory())* because ignored by Apache CXF unless I configure the *useHttpsURLConnectionDefaultSslSocketFactory* property.
 
 In order to achieve our goal we need to be able to use Apache CXF directly. Therefore it is necessary create an [OSGi Fragment](https://osgi.org/specification/osgi.core/7.0.0/framework.module.html#framework.module.fragmenthost) to export some Apache CXF packages. The fragment must be made on the module **Liferay Portal Remote SOAP Extender Implementation**
 

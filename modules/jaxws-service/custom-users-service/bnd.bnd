@@ -1,0 +1,4 @@
+Bundle-Description: Implementation for Custom User Service
+Bundle-Name: Custom Users Service Implementation
+Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.customusers.service.impl
+Bundle-Version: 1.0.0

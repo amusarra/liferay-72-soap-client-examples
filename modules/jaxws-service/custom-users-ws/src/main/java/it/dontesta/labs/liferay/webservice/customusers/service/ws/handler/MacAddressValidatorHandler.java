@@ -22,12 +22,17 @@
 
 package it.dontesta.labs.liferay.webservice.customusers.service.ws.handler;
 
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Validator;
+
+import it.dontesta.labs.liferay.webservice.customusers.service.ws.handler.configuration.MacAddressValidatorHandlerConfiguration;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.namespace.QName;
@@ -45,12 +50,15 @@ import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import javax.xml.ws.soap.SOAPFaultException;
 
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Modified;
 
 /**
  * @author Antonio Musarra
  */
 @Component(
+	configurationPid = MacAddressValidatorHandlerConfiguration.PID,
 	immediate = true,
 	property = "mac.address.validator.jax.ws.handler.filters=true",
 	service = Handler.class
@@ -74,10 +82,31 @@ public class MacAddressValidatorHandler
 
 	@Override
 	public boolean handleMessage(SOAPMessageContext context) {
-		return _doValidateMacAddress(context);
+		_doValidateMacAddress(context);
+
+		return true;
 	}
 
-	private boolean _doValidateMacAddress(SOAPMessageContext context) {
+	@Activate
+	protected void activate(Map<String, Object> properties) {
+		_macAddressValidatorHandlerConfiguration =
+			ConfigurableUtil.createConfigurable(
+				MacAddressValidatorHandlerConfiguration.class, properties);
+	}
+
+	@Modified
+	protected void modified(Map<String, Object> properties) {
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				String.format(
+					"The configuration %s was modified.",
+					MacAddressValidatorHandlerConfiguration.PID));
+		}
+
+		activate(properties);
+	}
+
+	private void _doValidateMacAddress(SOAPMessageContext context) {
 		Boolean isOutBound = (Boolean)context.get(
 			MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 
@@ -115,8 +144,11 @@ public class MacAddressValidatorHandler
 						soapMessage, "No MAC Address in header block.");
 				}
 
-				//TODO: Add code for checking Mac Address
-				if (!macValue.equals("90-4C-E5-44-B9-8F")) {
+				if (!ArrayUtil.contains(
+						_macAddressValidatorHandlerConfiguration.
+							macAddressWhiteList(),
+						macValue, true)) {
+
 					_generateSOAPErrorMessage(
 						soapMessage, "Invalid MAC Address, access is denied.");
 				}
@@ -127,8 +159,6 @@ public class MacAddressValidatorHandler
 				}
 			}
 		}
-
-		return true;
 	}
 
 	private void _generateSOAPErrorMessage(
@@ -154,5 +184,8 @@ public class MacAddressValidatorHandler
 
 	private static Log _log = LogFactoryUtil.getLog(
 		MacAddressValidatorHandler.class);
+
+	private volatile MacAddressValidatorHandlerConfiguration
+		_macAddressValidatorHandlerConfiguration;
 
 }

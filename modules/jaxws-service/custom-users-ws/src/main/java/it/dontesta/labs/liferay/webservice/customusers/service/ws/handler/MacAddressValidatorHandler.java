@@ -157,6 +157,8 @@ public class MacAddressValidatorHandler
 				if (_log.isErrorEnabled()) {
 					_log.error(soape.getMessage(), soape);
 				}
+				_generateSOAPErrorMessage(
+					context.getMessage(), soape.getMessage());
 			}
 		}
 	}

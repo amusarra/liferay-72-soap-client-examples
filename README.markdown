@@ -1,5 +1,3 @@
-
-
 # Liferay 7.2 SOAP Client Examples
 
 [![Antonio Musarra's Blog](https://img.shields.io/badge/maintainer-Antonio_Musarra's_Blog-purple.svg?colorB=6e60cc)](https://www.dontesta.it)
@@ -27,17 +25,43 @@ $ git clone https://github.com/amusarra/liferay-72-soap-client-examples.git
 $ cd liferay-72-soap-client-examples/
 $ echo "liferay.workspace.home.dir=$LIFERAY_HOME" > gradle-local.properties
 $ ./gradlew clean deploy
-$ blade sh lb Calculator
 ```
 
 Console 1 - Clone, build and debloy
 
 
 
-The list to see are the six bundles just installed against the deployment action.
+The topics covered by the project are:
+
+1. JAX-WS Client
+2. JAX-WS Client with the SSL/TLS Mutual Authentication supports
+3. JAX-WS Service End Point 
+4. JAX-WS Handler
+
+
+
+The table shows the list of modules that are available within this project.
+
+| Module                                            | Description                                                  |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| Calculator Client API                             | This module defines the APIs that each application can invoke to use the services of arithmetic operations (addition, subtraction, division and multiplication) |
+| Calculator SOAP Client Implementation             | This module implements the APIs defined by the calculator-api module and acts as a client to the SOAP Calculator service |
+| Calculator Client Gogo Shell Commands             | This module implements the Gogo Shell commands that use the APIs defined by the calculator-api module to perform the arithmetic operations |
+| Calculator Web Application                        | This module implements a standard MVC portlet that uses the APIs defined by the calculator-api module to perform the arithmetic operations |
+| Calculator SOAP Client SSL/TLS Mutual Auth Impl   | This module implements the SOAP Calculator client that supports Mutual Authentication |
+| Custom Users API (1.0.0)                          | This module defines the APIs that each application can invoke to use the custom users operation (getUsersByCategory, getUsersByTag, getUsersByTags, etc.) |
+| Custom Users Service Implementation               | This module implements the APIs defined by the custom-users-api module |
+| Custom Users Service JAX-WS API End Point         | This module implements the JAX-WS endpoint and two JAX-WS Handlers (**MacAddressValidatorHandler** and **AuditLogHandler**) |
+| Liferay Portal Remote SOAP Extender Impl Fragment | This module is an [OSGi Fragment](https://osgi.org/specification/osgi.core/7.0.0/framework.module.html#framework.module.fragmenthost) to export some Apache CXF packages |
+
+Table 1 - The list of the modules of this project
+
+
+
+The list to see are the nine bundles just installed against the deployment action.
 
 ```bash
-g! lb it.dontesta.labs.liferay
+lb it.dontesta.labs.liferay
 START LEVEL 20
    ID|State      |Level|Name
    72|Resolved   |   10|Liferay Portal Remote SOAP Extender Impl Fragment (1.0.0)|1.0.0
@@ -46,6 +70,9 @@ START LEVEL 20
    77|Active     |   10|Calculator SOAP Client Implementation (1.0.0)|1.0.0
    78|Active     |   10|Calculator Client Gogo Shell Commands (1.0.0)|1.0.0
  1086|Active     |   10|Calculator SOAP Client SSL/TLS Mutual Auth Impl (1.0.0)|1.0.0
+ 1087|Active     |   10|Custom Users API (1.0.0)|1.0.0
+ 1091|Active     |   10|Custom Users Service Implementation (1.0.0)|1.0.0
+ 1097|Active     |   10|Custom Users Service JAX-WS API End Point (1.0.0)|1.0.0
 
 ```
 

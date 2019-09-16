@@ -1,0 +1,8 @@
+Bundle-Description: API for Custom User Service
+Bundle-Name: Custom Users API
+Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.customusers.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	it.dontesta.labs.liferay.webservice.customusers.api,\
+	it.dontesta.labs.liferay.webservice.customusers.exception,\
+	it.dontesta.labs.liferay.webservice.customusers.model

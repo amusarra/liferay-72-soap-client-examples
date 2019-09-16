@@ -1,0 +1,6 @@
+Bundle-Description: JAX-WS API End Point for User Service
+Bundle-Name: Custom Users Service JAX-WS API End Point
+Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.customusers.service.ws
+Bundle-Version: 1.0.0
+Include-Resource: configuration=src/main/resources/configuration
+Liferay-Configuration-Path: /configuration

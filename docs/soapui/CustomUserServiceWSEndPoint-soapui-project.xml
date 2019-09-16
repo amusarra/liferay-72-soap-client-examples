@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/" xmlns:soap="soap">
+   <soapenv:Header>
+      <mac:MacAddress soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:mac="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/macaddress/value/">88:e9:fe:69:c6:88</mac:MacAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ws:getUsersByTag>
+         <!--Optional:-->
+         <arg0>smc</arg0>
+      </ws:getUsersByTag>
+   </soapenv:Body>
+</soapenv:Envelope>

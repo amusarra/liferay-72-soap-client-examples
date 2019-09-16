@@ -1,5 +1,3 @@
-
-
 # Liferay 7.2 SOAP Client Examples
 
 [![Antonio Musarra's Blog](https://img.shields.io/badge/maintainer-Antonio_Musarra's_Blog-purple.svg?colorB=6e60cc)](https://www.dontesta.it)
@@ -9,11 +7,14 @@
 At the 2016 Liferay Symposium (Italy) I presented the topic: [How to develop SOAP 
 and REST services in JAX-WS and JAX-RS standard on Liferay](https://www.slideshare.net/amusarra/jaxws-e-jaxrs). During the presentation I illustrated how to expose both REST (Representational State Transfer) and SOAP (Simple Object Access Protocol) services for each application using the [Liferay Extender](https://portal.liferay.dev/docs/7-0/tutorials/-/knowledge_base/t/jax-ws-and-jax-rs).
 
-In this project I want to show you how to build a SOAP JAX-WS (Java API for XML Web Services) client using the Liferay infrastructure. Let's start with a concrete example. The project was implemented and tested on **Liferay 7.2 Community Edition GA1**.
+In this project I want to show you how to build a SOAP JAX-WS (Java API for XML Web Services) client and [JAX-WS Handler](http://bit.ly/2Q9ibGN) using the Liferay infrastructure. Let's start with a concrete example. The project was implemented and tested on **Liferay 7.2 Community Edition GA1**.
 
-The project code is still valid for the 7.0 and 7.1 versions of Liferay. Before trying the project on Liferay 7.0, I recommend reading this [LPS – Supplied JAX-WS implementation not working](https://issues.liferay.com/browse/LPS-67253)
+The project code is still valid for the 7.0 and 7.1 versions of Liferay. Before trying the project on Liferay 7.0, I recommend reading this [LPS – Supplied JAX-WS implementation not working](https://issues.liferay.com/browse/LPS-67253)([CLOSED]) and [The Configuring Endpoints And Extenders Programmatically does not work](https://issues.liferay.com/browse/LPS-101642)([OPEN])
 
 Let’s consider the SOAP Calculator service whose [WSDL](http://www.dneonline.com/calculator.asmx) (Web Services Description Language) descriptor is available at the following address http://www.dneonline.com/calculator.asmx which exposes the four arithmetic operations between two integers.
+
+This project is related to article [How to implement a SOAP client using JAX-WS Liferay infrastructure](http://bit.ly/2lA0ukT) 
+published on [Antonio Musarra's Blog](https://www.dontesta.it) which I recommend you read.
 
 
 
@@ -27,17 +28,43 @@ $ git clone https://github.com/amusarra/liferay-72-soap-client-examples.git
 $ cd liferay-72-soap-client-examples/
 $ echo "liferay.workspace.home.dir=$LIFERAY_HOME" > gradle-local.properties
 $ ./gradlew clean deploy
-$ blade sh lb Calculator
 ```
 
-Console 1 - Clone, build and debloy
+**Console 1** - Clone, build and debloy
 
 
 
-The list to see are the six bundles just installed against the deployment action.
+The topics covered by the project are:
+
+1. JAX-WS Client
+2. JAX-WS Client with the SSL/TLS Mutual Authentication supports
+3. JAX-WS Service End Point 
+4. JAX-WS Handler
+
+
+
+The table shows the list of modules that are available within this project.
+
+| Module                                            | Description                                                  |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| Calculator Client API                             | This module defines the APIs that each application can invoke to use the services of arithmetic operations (addition, subtraction, division and multiplication) |
+| Calculator SOAP Client Implementation             | This module implements the APIs defined by the calculator-api module and acts as a client to the SOAP Calculator service |
+| Calculator Client Gogo Shell Commands             | This module implements the Gogo Shell commands that use the APIs defined by the calculator-api module to perform the arithmetic operations |
+| Calculator Web Application                        | This module implements a standard MVC portlet that uses the APIs defined by the calculator-api module to perform the arithmetic operations |
+| Calculator SOAP Client SSL/TLS Mutual Auth Impl   | This module implements the SOAP Calculator client that supports Mutual Authentication |
+| Custom Users API (1.0.0)                          | This module defines the APIs that each application can invoke to use the custom users operation (getUsersByCategory, getUsersByTag, getUsersByTags, etc.) |
+| Custom Users Service Implementation               | This module implements the APIs defined by the custom-users-api module |
+| Custom Users Service JAX-WS API End Point         | This module implements the JAX-WS endpoint and two JAX-WS Handlers (**MacAddressValidatorHandler** and **AuditLogHandler**) |
+| Liferay Portal Remote SOAP Extender Impl Fragment | This module is an [OSGi Fragment](https://osgi.org/specification/osgi.core/7.0.0/framework.module.html#framework.module.fragmenthost) to export some Apache CXF packages |
+
+**Table 1** - The list of the modules of this project
+
+
+
+The list to see are the nine bundles just installed against the deployment action.
 
 ```bash
-g! lb it.dontesta.labs.liferay
+lb it.dontesta.labs.liferay
 START LEVEL 20
    ID|State      |Level|Name
    72|Resolved   |   10|Liferay Portal Remote SOAP Extender Impl Fragment (1.0.0)|1.0.0
@@ -46,15 +73,13 @@ START LEVEL 20
    77|Active     |   10|Calculator SOAP Client Implementation (1.0.0)|1.0.0
    78|Active     |   10|Calculator Client Gogo Shell Commands (1.0.0)|1.0.0
  1086|Active     |   10|Calculator SOAP Client SSL/TLS Mutual Auth Impl (1.0.0)|1.0.0
+ 1087|Active     |   10|Custom Users API (1.0.0)|1.0.0
+ 1091|Active     |   10|Custom Users Service Implementation (1.0.0)|1.0.0
+ 1097|Active     |   10|Custom Users Service JAX-WS API End Point (1.0.0)|1.0.0
 
 ```
 
-Console 2 - Check status of the Calculator bundle
-
-
-
-For more information refer to article [How to implement a SOAP client using JAX-WS Liferay infrastructure](http://bit.ly/2lA0ukT) 
-published on [Antonio Musarra's Blog](https://www.dontesta.it).
+**Console 2** - Check status of the Calculator bundle
 
 
 
@@ -76,7 +101,7 @@ We recall that Liferay uses the [Apache CXF framework](https://cxf.apache.org/) 
 -Djavax.net.ssl.keyStoreType=
 ```
 
-Console 3 - System settings for configure truststore and keystore
+**Console 3** - System settings for configure truststore and keystore
 
 
 
@@ -96,7 +121,7 @@ Also we can't use the **SSLContext** setting via **JAX-WS API** because ignored 
 );
 ```
 
-Source Code 1 - Setting SSLSocketFactory
+**Source Code 1** - Setting SSLSocketFactory
 
 
 
@@ -118,7 +143,7 @@ Export-Package: \
 	org.apache.cxf.frontend;version="3.2.5"
 ```
 
-Source Code 2 - The bnd.bnd of the OSGi Fragment Liferay Portal Remote SOAP Extender Implementation
+**Source Code 2** - The bnd.bnd of the OSGi Fragment Liferay Portal Remote SOAP Extender Implementation
 
 
 
@@ -166,7 +191,9 @@ private CalculatorSoap _getService(boolean renew)
 }
 ```
 
-Source Code 3 - Core implementation of the _getService() method of the service CalculatorClientSSLTLSMutualAuthImpl
+**Source Code 3** - Core implementation of the _getService() method of the service CalculatorClientSSLTLSMutualAuthImpl
+
+
 
 
 
@@ -206,7 +233,9 @@ private void _setUpSecurityClientConnection()
 }
 ```
 
-Source Code 4 - Core implementation of the _setUpSecurityClientConnection() method of the service CalculatorClientSSLTLSMutualAuthImpl
+**Source Code 4** - Core implementation of the _setUpSecurityClientConnection() method of the service CalculatorClientSSLTLSMutualAuthImpl
+
+
 
 
 
@@ -249,7 +278,7 @@ private SSLSocketFactory _getSSLConnectionSocketFactory()
 }
 ```
 
-Source Code 5 - Core implementation of the _getSSLConnectionSocketFactory() method of the service CalculatorClientSSLTLSMutualAuthImpl
+**Source Code 5** - Core implementation of the _getSSLConnectionSocketFactory() method of the service CalculatorClientSSLTLSMutualAuthImpl
 
 
 
@@ -272,7 +301,7 @@ In the structure below we can see the keystore (tls-client.dontesta.it.p12) and 
                       └── calculator.wsdl
 ```
 
-Console 4 - Resources of the calculator-service-ssl-tls-mutual-auth module
+**Console 4** - Resources of the calculator-service-ssl-tls-mutual-auth module
 
 
 
@@ -294,13 +323,13 @@ I also wanted to implement the configuration bonus for this SOAP client. The fig
 
 ![ConfigurationSOAPExternalService_1](docs/images/ConfigurationSOAPExternalService_1.png)
 
-Figure 1 - System Settings configuration for Calculator Service
+**Figure 1** - System Settings configuration for Calculator Service
 
 
 
 ![ConfigurationSOAPExternalService_2](docs/images/ConfigurationSOAPExternalService_2.png)
 
-Figure 2 - Configuration detail of the Calculator Service
+**Figure 2** - Configuration detail of the Calculator Service
 
 
 
@@ -320,7 +349,7 @@ $ docker run -i -t -d \
 	amusarra/apache-ssl-tls-mutual-authentication:1.2.3
 ```
 
-Console 5 - Start of the SOAP Calculator service protected by the mutual authentication mechanism.
+**Console 5** - Start of the SOAP Calculator service protected by the mutual authentication mechanism.
 
 
 
@@ -335,7 +364,7 @@ The new WSDL of the service will be available at the URL https://localhost:10443
 127.0.0.1       tls-auth.dontesta.it
 ```
 
-Source Code 6 - File /etc/hosts
+**Source Code 6** - File /etc/hosts
 
 
 
@@ -347,13 +376,15 @@ The two figures below show the process of mutual authentication to access the WS
 
 ![MutualAuthenticationViaBrowser_1](docs/images/MutualAuthenticationViaBrowser_1.png)
 
-Figure 3 - Mutual Authentication request for the WSDL resource
+**Figure 3** - Mutual Authentication request for the WSDL resource
+
+
 
 
 
 ![MutualAuthenticationViaBrowser_2](docs/images/MutualAuthenticationViaBrowser_2.png)
 
-Figure 4 - WSDL document of the Calculator SOAP Service
+**Figure 4** - WSDL document of the Calculator SOAP Service
 
 
 
@@ -378,7 +409,7 @@ START LEVEL 20
  1086|Active     |   10|Calculator SOAP Client SSL/TLS Mutual Auth Imp (1.0.0)|1.0.0
 ```
 
-Console 6 - Stop the bundle Calculator SOAP Client Implementation
+**Console 6** - Stop the bundle Calculator SOAP Client Implementation
 
 
 
@@ -417,7 +448,9 @@ References:   (total 1)
     * Bound to [10973] from bundle 1086 (it.dontesta.labs.liferay.webservice.calculator.client.tls:1.0.0)
 ```
 
-Console 7 - src:info for checking the bound service for Gogo Shell Command
+**Console 7** - src:info for checking the bound service for Gogo Shell Command
+
+
 
 
 
@@ -452,12 +485,125 @@ References:   (total 1)
     * Bound to [10973] from bundle 1086 (it.dontesta.labs.liferay.webservice.calculator.client.tls:1.0.0)
 ```
 
-Console 8 - src:info for checking the bound service for AddOperationMVCActionCommand
+**Console 8** - src:info for checking the bound service for AddOperationMVCActionCommand
 
 
 
-For more information refer to article [How to implement a SOAP client using JAX-WS Liferay infrastructure](http://bit.ly/2lA0ukT) 
-published on [Antonio Musarra's Blog](https://www.dontesta.it).
+## 4. How to configure JAX-WS Handlers 
+
+Using the Liferay JAX-WS infrastructure it is possible in a very simple way to configure one or more JAX-WS Handlers for each endpoint.
+
+The endpoint **/custom-user** must be configured manually via the control panel. The **custom-users-ws** module has been set up for automatic [configuration](https://github.com/amusarra/liferay-72-soap-client-examples/tree/feature/jax-ws-soap-handler-in-server-side/modules/jaxws-service/custom-users-ws/src/main/resources/configuration) but at the moment it doesn't seem to work (see [LPS-101642](https://issues.liferay.com/browse/LPS-101642)).
+
+
+
+![ConfigurationSOAPExternalService_3](docs/images/ConfigurationSOAPExternalService_3.png)
+
+**Figure 5** - JAX-WS Handler configuration for endpoint /custom-user
+
+
+
+Through the **JAX-WS Handler Filters** you can specify a set of [OSGi filters](https://osgi.org/javadoc/r6/core/org/osgi/framework/Filter.html) that select certain services registered in the OSGi framework. The selected services should implement JAX-WS handlers and augment the JAX-WS services specified in the *jax.ws.service.filters* property. These JAX-WS handlers apply to each service selected in this extender.
+
+
+
+The two code fragments show the two JAX-WS Handlers (which are OSGi components) configured in figure 5. Note the properties of the OSGi component where specified OSGi filter.
+
+
+
+```java
+/**
+ * @author Antonio Musarra
+ */
+@Component(
+	configurationPid = MacAddressValidatorHandlerConfiguration.PID,
+	immediate = true,
+	property = "mac.address.validator.jax.ws.handler.filters=true",
+	service = Handler.class
+)
+public class MacAddressValidatorHandler
+	implements SOAPHandler<SOAPMessageContext> {
+		...
+}
+```
+
+**Source Code 7** - Mac Address Validator JAX-WS Handler
+
+
+
+The Handler [MacAddressValidatorHandler](https://github.com/amusarra/liferay-72-soap-client-examples/blob/feature/jax-ws-soap-handler-in-server-side/modules/jaxws-service/custom-users-ws/src/main/java/it/dontesta/labs/liferay/webservice/customusers/service/ws/handler/MacAddressValidatorHandler.java) performs the validation of the Mac Address that the SOAP client passes in the SOAP Headers.
+
+
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/" xmlns:soap="soap">
+   <soapenv:Header>
+      <mac:MacAddress 
+      	soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" 
+      	xmlns:mac="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/macaddress/value/">88:e9:fe:69:c6:88</mac:MacAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ws:getUsersByTag>
+         <!--Optional:-->
+         <arg0>SoftwareArchitect</arg0>
+      </ws:getUsersByTag>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+**Source Code 8** - SOAP Request with evidence of the Mac Address header
+
+
+
+```xml
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <soap:Fault>
+         <faultcode xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">soapenv:Server</faultcode>
+         <faultstring>Invalid MAC Address, access is denied.</faultstring>
+      </soap:Fault>
+   </soap:Body>
+</soap:Envelope>
+```
+
+**Source Code 9** - SOAP Fault generated by the Mac Address validation Handler
+
+
+
+The Mac Addresses to be enabled can be configured from the control panel.
+
+
+
+![ConfigurationSOAPExternalService_5](docs/images/ConfigurationSOAPExternalService_5.png)
+
+**Figure 6** - Configuration of the JAX-WS Handler Mac Address Validator
+
+
+
+The Handler [AuditLogHandler](https://github.com/amusarra/liferay-72-soap-client-examples/blob/feature/jax-ws-soap-handler-in-server-side/modules/jaxws-service/custom-users-ws/src/main/java/it/dontesta/labs/liferay/webservice/customusers/service/ws/handler/AuditLogHandler.java) audits SOAP messages in input and output via the [Liferay Audit framework](https://amzn.to/2kMq4Dd).
+
+
+
+```java
+/**
+ * @author Antonio Musarra
+ */
+@Component(
+	immediate = true, property = "audit.log.jax.ws.handler.filters=true",
+	service = Handler.class
+)
+public class AuditLogHandler implements SOAPHandler<SOAPMessageContext> {
+    ...
+}
+```
+
+**Source Code 10** - Audit Log JAX-WS Handler
+
+
+
+![AuditLogJAXWSHandler_1](docs/images/AuditLogJAXWSHandler_1.png)
+
+**Figure 7** - Trace the Audit Event via Audit Log JAX-WS Handler
 
 
 

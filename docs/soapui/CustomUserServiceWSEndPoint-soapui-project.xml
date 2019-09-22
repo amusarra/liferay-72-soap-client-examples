@@ -1,12 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/" xmlns:soap="soap">
+<con:soapui-project id="ae1fe842-8a95-4028-9e92-26b1234a4881" activeEnvironment="Default" name="CustomUserServiceWSEndPoint" resourceRoot="" soapui-version="5.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="880314b0-b80b-4953-9033-236aea8434e2" wsaVersion="NONE" name="CustomUserServiceWSEndPointServiceSoapBinding" type="wsdl" bindingName="{http://ws.service.customusers.webservice.liferay.labs.dontesta.it/}CustomUserServiceWSEndPointServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/o/users-jaxws/CustomUserServiceWSEndPoint?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/o/users-jaxws/CustomUserServiceWSEndPoint?wsdl"><con:part><con:url>http://localhost:8080/o/users-jaxws/CustomUserServiceWSEndPoint?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CustomUserServiceWSEndPointService" targetNamespace="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="person" type="tns:person"/>
+      <xs:element name="personList" type="tns:personList"/>
+      <xs:complexType name="getUsersByCategory">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUsersByCategoryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:personList"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="personList">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="_persons" type="tns:person"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="person">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+          <xs:element name="userId" type="xs:long"/>
+          <xs:element minOccurs="0" name="userName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUsersByTags">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUsersByTagsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:personList"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUsersByTag">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUsersByTagResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:personList"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getUsersByCategory" nillable="true" type="tns:getUsersByCategory"/>
+      <xs:element name="getUsersByCategoryResponse" nillable="true" type="tns:getUsersByCategoryResponse"/>
+      <xs:element name="CustomUserServiceException" type="tns:CustomUserServiceException"/>
+      <xs:complexType name="CustomUserServiceException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getUsersByTags" nillable="true" type="tns:getUsersByTags"/>
+      <xs:element name="getUsersByTagsResponse" nillable="true" type="tns:getUsersByTagsResponse"/>
+      <xs:element name="getUsersByTag" nillable="true" type="tns:getUsersByTag"/>
+      <xs:element name="getUsersByTagResponse" nillable="true" type="tns:getUsersByTagResponse"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CustomUserServiceException">
+    <wsdl:part element="tns:CustomUserServiceException" name="CustomUserServiceException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersByCategoryResponse">
+    <wsdl:part element="tns:getUsersByCategoryResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersByTagResponse">
+    <wsdl:part element="tns:getUsersByTagResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersByTag">
+    <wsdl:part element="tns:getUsersByTag" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersByTagsResponse">
+    <wsdl:part element="tns:getUsersByTagsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersByCategory">
+    <wsdl:part element="tns:getUsersByCategory" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersByTags">
+    <wsdl:part element="tns:getUsersByTags" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomUserServiceWSEndPoint">
+    <wsdl:operation name="getUsersByCategory">
+      <wsdl:input message="tns:getUsersByCategory" name="getUsersByCategory"></wsdl:input>
+      <wsdl:output message="tns:getUsersByCategoryResponse" name="getUsersByCategoryResponse"></wsdl:output>
+      <wsdl:fault message="tns:CustomUserServiceException" name="CustomUserServiceException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersByTags">
+      <wsdl:input message="tns:getUsersByTags" name="getUsersByTags"></wsdl:input>
+      <wsdl:output message="tns:getUsersByTagsResponse" name="getUsersByTagsResponse"></wsdl:output>
+      <wsdl:fault message="tns:CustomUserServiceException" name="CustomUserServiceException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersByTag">
+      <wsdl:input message="tns:getUsersByTag" name="getUsersByTag"></wsdl:input>
+      <wsdl:output message="tns:getUsersByTagResponse" name="getUsersByTagResponse"></wsdl:output>
+      <wsdl:fault message="tns:CustomUserServiceException" name="CustomUserServiceException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomUserServiceWSEndPointServiceSoapBinding" type="tns:CustomUserServiceWSEndPoint">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getUsersByCategory">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUsersByCategory">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersByCategoryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CustomUserServiceException">
+        <soap:fault name="CustomUserServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersByTags">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUsersByTags">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersByTagsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CustomUserServiceException">
+        <soap:fault name="CustomUserServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersByTag">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUsersByTag">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersByTagResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CustomUserServiceException">
+        <soap:fault name="CustomUserServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomUserServiceWSEndPointService">
+    <wsdl:port binding="tns:CustomUserServiceWSEndPointServiceSoapBinding" name="CustomUserServiceWSEndPointPort">
+      <soap:address location="http://localhost:8080/o/users-jaxws/CustomUserServiceWSEndPoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/o/custom-user/CustomUserServiceWSEndPoint</con:endpoint></con:endpoints><con:operation id="380610c7-2d8d-47c9-b736-7cd37613c633" isOneWay="false" action="" name="getUsersByCategory" bindingOperationName="getUsersByCategory" type="Request-Response" outputName="getUsersByCategoryResponse" inputName="getUsersByCategory" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9417aa22-a17d-44d4-bd73-22c0b173289c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/o/custom-user/CustomUserServiceWSEndPoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:getUsersByCategory>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </ws:getUsersByCategory>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/CustomUserServiceWSEndPoint/getUsersByCategory"/></con:call></con:operation><con:operation id="351781d2-2378-4c1f-a796-a8b72bc46a3a" isOneWay="false" action="" name="getUsersByTag" bindingOperationName="getUsersByTag" type="Request-Response" outputName="getUsersByTagResponse" inputName="getUsersByTag" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2b2fbb62-9d81-4c09-ae26-c0fd08c98bac" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/o/custom-user/CustomUserServiceWSEndPoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/" xmlns:soap="soap">
    <soapenv:Header>
-      <mac:MacAddress soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:mac="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/macaddress/value/">88:e9:fe:69:c6:88</mac:MacAddress>
+      <mac:MacAddress 
+      	soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" 
+      	xmlns:mac="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/macaddress/value/">88:e9:fe:69:c6:88</mac:MacAddress>
    </soapenv:Header>
    <soapenv:Body>
       <ws:getUsersByTag>
          <!--Optional:-->
-         <arg0>smc</arg0>
+         <arg0>Software</arg0>
       </ws:getUsersByTag>
    </soapenv:Body>
-</soapenv:Envelope>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/CustomUserServiceWSEndPoint/getUsersByTag"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="b19eee80-9ef9-46ce-954a-7031a86dd2a3" isOneWay="false" action="" name="getUsersByTags" bindingOperationName="getUsersByTags" type="Request-Response" outputName="getUsersByTagsResponse" inputName="getUsersByTags" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ad671cb0-fec5-443b-a4be-1d217595b819" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/o/custom-user/CustomUserServiceWSEndPoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:getUsersByTags>
+         <!--Zero or more repetitions:-->
+         <arg0>?</arg0>
+      </ws:getUsersByTags>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.service.customusers.webservice.liferay.labs.dontesta.it/CustomUserServiceWSEndPoint/getUsersByTags"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

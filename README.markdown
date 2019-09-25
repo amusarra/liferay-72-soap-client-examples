@@ -56,6 +56,9 @@ The table shows the list of modules that are available within this project.
 | Custom Users Service Implementation               | This module implements the APIs defined by the custom-users-api module |
 | Custom Users Service JAX-WS API End Point         | This module implements the JAX-WS endpoint and two JAX-WS Handlers (**MacAddressValidatorHandler** and **AuditLogHandler**) |
 | Liferay Portal Remote SOAP Extender Impl Fragment | This module is an [OSGi Fragment](https://osgi.org/specification/osgi.core/7.0.0/framework.module.html#framework.module.fragmenthost) to export some Apache CXF packages |
+| UE VIES VAT Service Client API                    | This module defines the APIs that each application can invoke to use the VIES VAT Service |
+| UE VIES VAT Service SOAP Client Impl              | This module implements the APIs defined by the vat-service-client-api module and acts as a client to the SOAP VIES VAT Service |
+| UE VIES VAT Service Client Gogo Shell             | This module implements the Gogo Shell commands that use the APIs defined by the vat-service-client-api module to perform the check VAT operations |
 
 **Table 1** - The list of the modules of this project
 
@@ -76,7 +79,10 @@ START LEVEL 20
  1087|Active     |   10|Custom Users API (1.0.0)|1.0.0
  1091|Active     |   10|Custom Users Service Implementation (1.0.0)|1.0.0
  1097|Active     |   10|Custom Users Service JAX-WS API End Point (1.0.0)|1.0.0
-
+ 1123|Active     |   10|Custom Users Service JAX-WS API End Point (1.0.0)|1.0.0
+ 1124|Active     |   10|UE VIES VAT Service Client API (1.0.0)|1.0.0
+ 1125|Active     |   10|UE VIES VAT Service Client Gogo Shell (1.0.0)|1.0.0
+ 1126|Active     |   10|UE VIES VAT Service SOAP Client Impl (1.0.0)|1.0.0
 ```
 
 **Console 2** - Check status of the Calculator bundle

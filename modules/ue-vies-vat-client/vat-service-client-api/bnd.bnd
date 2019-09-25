@@ -1,0 +1,7 @@
+Bundle-Name: UE VIES VAT Service Client API
+Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.vat.service.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	it.dontesta.labs.liferay.webservice.vat.service.api,\
+	it.dontesta.labs.liferay.webservice.vat.service.exception,\
+	it.dontesta.labs.liferay.webservice.vat.service.model

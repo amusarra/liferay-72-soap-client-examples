@@ -1,0 +1,3 @@
+Bundle-Name: UE VIES VAT Service SOAP Client Impl
+Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.vat.service.client.impl
+Bundle-Version: 1.0.0

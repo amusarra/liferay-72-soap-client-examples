@@ -20,37 +20,44 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.dontesta.labs.liferay.webservice.vat.service.client.gogoshell;
+package it.dontesta.labs.liferay.webservice.vat.service.client.gogoshell.converter;
 
-import it.dontesta.labs.liferay.webservice.vat.service.api.VatServiceClient;
-import it.dontesta.labs.liferay.webservice.vat.service.exception.VatServiceClientOperationException;
+import it.dontesta.labs.liferay.webservice.vat.service.client.gogoshell.util.JAXBUtil;
+
+import javax.xml.bind.JAXBException;
+
 import it.dontesta.labs.liferay.webservice.vat.service.model.VatResponse;
+import org.apache.felix.service.command.Converter;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 /**
  * @author Antonio Musarra
  */
-@Component(
-	property = {"osgi.command.function=checkVat", "osgi.command.scope=vat"},
-	service = Object.class
-)
-public class VatServiceClientCommand implements VatServiceClient {
+@Component(immediate = true, service = Converter.class)
+public class JAXBConverter implements Converter {
 
 	@Override
-	public VatResponse checkVat(String countryCode, String vatNumber)
-		throws VatServiceClientOperationException {
-
-		return getVatServiceClient().checkVat(countryCode, vatNumber);
+	public Object convert(Class<?> desiredType, Object in) throws Exception {
+		return null;
 	}
 
-	public VatServiceClient getVatServiceClient() {
-		return _vatServiceClient;
+	@Override
+	public CharSequence format(Object target, int level, Converter escape)
+		throws Exception {
+
+		if (target instanceof VatResponse) {
+			return _toXML(target);
+		}
+		else {
+			return null;
+		}
 	}
 
-	@Reference(policyOption = ReferencePolicyOption.GREEDY)
-	private volatile VatServiceClient _vatServiceClient;
+	private CharSequence _toXML(Object target) throws JAXBException {
+		return JAXBUtil.getObjectAsXML(
+			target.getClass(), target, true
+		).getBuffer();
+	}
 
 }

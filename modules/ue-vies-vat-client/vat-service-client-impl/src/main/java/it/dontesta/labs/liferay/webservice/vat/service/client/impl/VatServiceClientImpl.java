@@ -69,7 +69,10 @@ public class VatServiceClientImpl implements VatServiceClient {
 
 			vatResponse.setCountryCode(countryCodeHolder.value);
 			vatResponse.setVatNumber(vatNumberHolder.value);
-			vatResponse.setBusinessAddress(businessAddressHolder.value);
+			vatResponse.setBusinessAddress(
+				businessAddressHolder.value.replaceAll(
+					"\\r\\n|\\r|\\n", " "
+				).trim());
 			vatResponse.setBusinessName(businessNameHolder.value);
 			vatResponse.setValid(validHolder.value);
 			vatResponse.setRequestDate(

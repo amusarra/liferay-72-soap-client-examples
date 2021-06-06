@@ -1,3 +1,7 @@
 Bundle-Name: UE VIES VAT Service Client Gogo Shell
 Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.vat.service.client.gogoshell
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0
+Import-Package: \
+	*;resolution:=optional
+-fixupmessages: Classes found in the wrong directory: ...;is:=ignore
+-noimportjava: true

@@ -1,4 +1,8 @@
 Bundle-Name: Calculator Web Application
 Bundle-SymbolicName: it.dontesta.labs.liferay.web.calculator
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0
 Export-Package: it.dontesta.labs.liferay.web.calculator.constants
+Import-Package: \
+	*;resolution:=optional
+-fixupmessages: Classes found in the wrong directory: ...;is:=ignore
+-noimportjava: true

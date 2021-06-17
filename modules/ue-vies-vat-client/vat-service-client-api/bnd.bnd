@@ -6,6 +6,7 @@ Export-Package:\
 	it.dontesta.labs.liferay.webservice.vat.service.exception,\
 	it.dontesta.labs.liferay.webservice.vat.service.model
 Import-Package: \
-	*;resolution:=optional
+	javax.jws;version="[1.1,2)", \
+	*
 -fixupmessages: Classes found in the wrong directory: ...;is:=ignore
 -noimportjava: true

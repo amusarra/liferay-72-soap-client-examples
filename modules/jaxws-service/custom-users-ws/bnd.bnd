@@ -5,6 +5,7 @@ Bundle-Version: 2.0.0
 Include-Resource: configuration=src/main/resources/configuration
 Liferay-Configuration-Path: /configuration
 Import-Package: \
-	*;resolution:=optional
+	javax.jws;version="[1.1,2)", \
+	*
 -fixupmessages: Classes found in the wrong directory: ...;is:=ignore
 -noimportjava: true

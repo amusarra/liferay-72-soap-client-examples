@@ -22,17 +22,16 @@
 
 package it.dontesta.labs.liferay.webservice.calculator.client.soap;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
-
 import it.dontesta.labs.liferay.webservice.calculator.api.Calculator;
 import it.dontesta.labs.liferay.webservice.calculator.exception.CalculatorOperationException;
 import it.dontesta.labs.liferay.webservice.calculator.exception.CalculatorServiceException;
+import org.osgi.service.component.annotations.Component;
+import org.tempuri.CalculatorSoap;
 
 import javax.xml.ws.WebServiceException;
-
-import org.osgi.service.component.annotations.Component;
-
-import org.tempuri.CalculatorSoap;
 
 /**
  * @author Antonio Musarra
@@ -49,7 +48,10 @@ public class CalculatorClientImpl implements Calculator {
 		try {
 			return _getService().add(number1, number2);
 		}
-		catch (CalculatorServiceException cse) {
+		catch (CalculatorServiceException | WebServiceException cse) {
+			if (_log.isErrorEnabled()) {
+				_log.error(cse.getMessage(), cse);
+			}
 			throw new CalculatorOperationException(cse.getMessage(), cse);
 		}
 	}
@@ -61,7 +63,10 @@ public class CalculatorClientImpl implements Calculator {
 		try {
 			return _getService().divide(number1, number2);
 		}
-		catch (CalculatorServiceException cse) {
+		catch (CalculatorServiceException | WebServiceException cse) {
+			if (_log.isErrorEnabled()) {
+				_log.error(cse.getMessage(), cse);
+			}
 			throw new CalculatorOperationException(cse.getMessage(), cse);
 		}
 	}
@@ -73,7 +78,10 @@ public class CalculatorClientImpl implements Calculator {
 		try {
 			return _getService().multiply(number1, number2);
 		}
-		catch (CalculatorServiceException cse) {
+		catch (CalculatorServiceException | WebServiceException cse) {
+			if (_log.isErrorEnabled()) {
+				_log.error(cse.getMessage(), cse);
+			}
 			throw new CalculatorOperationException(cse.getMessage(), cse);
 		}
 	}
@@ -85,7 +93,10 @@ public class CalculatorClientImpl implements Calculator {
 		try {
 			return _getService().subtract(number1, number2);
 		}
-		catch (CalculatorServiceException cse) {
+		catch (CalculatorServiceException | WebServiceException cse) {
+			if (_log.isErrorEnabled()) {
+				_log.error(cse.getMessage(), cse);
+			}
 			throw new CalculatorOperationException(cse.getMessage(), cse);
 		}
 	}
@@ -98,16 +109,19 @@ public class CalculatorClientImpl implements Calculator {
 				_calculatorSoap = calculator.getCalculatorSoap();
 			}
 			catch (WebServiceException wse) {
+				if (_log.isErrorEnabled()) {
+					_log.error(wse.getMessage(), wse);
+				}
 				throw new CalculatorServiceException(wse.getMessage(), wse);
 			}
 
-			return _calculatorSoap;
 		}
-		else {
-			return _calculatorSoap;
-		}
+		return _calculatorSoap;
 	}
 
 	private CalculatorSoap _calculatorSoap;
+
+	private Log _log = LogFactoryUtil.getLog(
+		CalculatorClientImpl.class);
 
 }

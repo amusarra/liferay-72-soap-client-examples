@@ -1,5 +1,5 @@
 dependencies {
 	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
-	compileInclude group: "com.sun.xml.ws", name: "jaxws-ri", version: "2.3.4"
+	compileOnly group: "com.sun.xml.ws", name: "jaxws-ri", version: "2.3.4"
 	compileOnly project(":modules:calculator:calculator-api")
 }

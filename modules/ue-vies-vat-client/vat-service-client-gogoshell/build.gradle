@@ -1,6 +1,6 @@
 dependencies {
 	compileOnly group: "org.apache.felix", name: "org.apache.felix.gogo.runtime", version: "1.1.0"
 	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
-	compileInclude group: "com.sun.xml.ws", name: "jaxws-ri", version: "2.3.4"
+	compileOnly group: "com.sun.xml.ws", name: "jaxws-ri", version: "2.3.4"
 	compileOnly project(":modules:ue-vies-vat-client:vat-service-client-api")
 }

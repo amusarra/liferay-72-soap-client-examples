@@ -96,9 +96,10 @@ public interface CalculatorSOAPClientConfiguration {
 		name = "https-protocol-name",
 		optionLabels = {
 			"Transport Layer Security (TLS) 1.1",
-			"Transport Layer Security (TLS) 1.2"
+			"Transport Layer Security (TLS) 1.2",
+			"Transport Layer Security (TLS) 1.3"
 		},
-		optionValues = {"TLSv1.1", "TLSv1.2"}, required = false
+		optionValues = {"TLSv1.1", "TLSv1.2", "TLSv1.3"}, required = false
 	)
 	public String httpsProtocol();
 

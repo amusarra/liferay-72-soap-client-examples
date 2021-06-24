@@ -1,3 +1,8 @@
 Bundle-Name: Calculator SOAP Client SSL/TLS Mutual Auth Implementation
 Bundle-SymbolicName: it.dontesta.labs.liferay.webservice.calculator.client.tls
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0
+Import-Package: \
+	javax.jws;version="[1.1,2)", \
+	*
+-fixupmessages: Classes found in the wrong directory: ...;is:=ignore
+-noimportjava: true

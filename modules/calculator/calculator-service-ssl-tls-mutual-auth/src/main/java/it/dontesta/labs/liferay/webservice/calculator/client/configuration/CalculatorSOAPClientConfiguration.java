@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Antonio Musarra's Blog - https://www.dontesta.it
+ * Copyright (c) 2009-present Antonio Musarra's Blog - https://www.dontesta.it
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in the
@@ -96,9 +96,10 @@ public interface CalculatorSOAPClientConfiguration {
 		name = "https-protocol-name",
 		optionLabels = {
 			"Transport Layer Security (TLS) 1.1",
-			"Transport Layer Security (TLS) 1.2"
+			"Transport Layer Security (TLS) 1.2",
+			"Transport Layer Security (TLS) 1.3"
 		},
-		optionValues = {"TLSv1.1", "TLSv1.2"}, required = false
+		optionValues = {"TLSv1.1", "TLSv1.2", "TLSv1.3"}, required = false
 	)
 	public String httpsProtocol();
 

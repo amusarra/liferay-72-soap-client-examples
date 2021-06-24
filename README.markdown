@@ -1,7 +1,7 @@
 # Liferay 7.3 SOAP Client Examples
 
 [![Antonio Musarra's Blog](https://img.shields.io/badge/maintainer-Antonio_Musarra's_Blog-purple.svg?colorB=6e60cc)](https://www.dontesta.it)
-[![Build Status](https://travis-ci.org/amusarra//liferay-72-soap-client-examples.svg?branch=master)](https://travis-ci.org/amusarra/liferay-72-soap-client-examples)
+[![Build Status](https://travis-ci.com/amusarra/liferay-72-soap-client-examples.svg?branch=master)](https://travis-ci.com/amusarra/liferay-72-soap-client-examples)
 [![Twitter Follow](https://img.shields.io/twitter/follow/antonio_musarra.svg?style=social&label=%40antonio_musarra%20on%20Twitter&style=plastic)](https://twitter.com/antonio_musarra)
 
 At the 2016 Liferay Symposium (Italy) I presented the topic: [How to develop SOAP 
@@ -14,7 +14,7 @@ project implemented and tested on **Liferay 7.3 Community Edition GA6**.
 I recommend that you read the project change logs.
 
 **It is important that you know that the current version of the project requires 
-version 11 as JDK.**
+the version 11 of Java JDK.**
 
 The project code is still valid for the 7.0 and 7.1 versions of Liferay. 
 Before trying the project on Liferay 7.0, I recommend reading 

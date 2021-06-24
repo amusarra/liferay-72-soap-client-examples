@@ -1,5 +1,7 @@
 dist: trusty
 sudo: required
 language: java
+jdk:
+  - openjdk11
 
 install: ./gradlew clean build
